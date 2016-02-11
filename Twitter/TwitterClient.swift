@@ -26,6 +26,36 @@ class TwitterClient: BDBOAuth1SessionManager {
         return Static.instance
     }
     
+    func postTweet(params: NSDictionary?){
+        POST("1.1/statuses/update.json", parameters: params, progress: nil, success: { (operation, response) -> Void in
+            
+            print("post successful")
+            
+            }, failure: { (operation, error) -> Void in
+                print("post unsuccessful")
+        })
+    }
+    
+    func favoriteTweet(params: NSDictionary?){
+        POST("1.1/favorites/create.json", parameters: params, progress: nil, success: { (operation, response) -> Void in
+            
+            print("favorite successful")
+            
+            }, failure: { (operation, error) -> Void in
+                print("favorite unsuccessful")
+        })
+    }
+    
+    func unfavoriteTweet(params: NSDictionary?){
+        POST("1.1/favorites/destroy.json", parameters: params, progress: nil, success: { (operation, response) -> Void in
+            
+            print("unfavorite successful")
+            
+            }, failure: { (operation, error) -> Void in
+                print("unfavorite unsuccessful")
+        })
+    }
+    
     func retweetTweet(params: NSDictionary?){
         let id = params!["id"] as! Int
         POST("1.1/statuses/retweet/\(id).json", parameters: params, progress: nil, success: { (operation, response) -> Void in
@@ -37,11 +67,23 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func unretweetTweet(params: NSDictionary?){
+        let id = params!["id"] as! Int
+        POST("1.1/statuses/unretweet/\(id).json", parameters: params, progress: nil, success: { (operation, response) -> Void in
+            
+            print("unretweet successful")
+            
+            }, failure: { (operation, error) -> Void in
+                print("unretweet unsuccessful")
+        })
+    }
+    
     func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
         GET("1.1/statuses/home_timeline.json", parameters: params, progress: nil, success: { (operation, response) -> Void in
             
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
+            //print(response)
             
             }, failure: { (operation, error) -> Void in
                 completion(tweets: nil, error: error)

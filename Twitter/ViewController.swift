@@ -12,8 +12,12 @@ import AFNetworking
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginButton.layer.cornerRadius = 25
         // Do any additional setup after loading the view, typically from a nib.
     }
     

@@ -18,6 +18,7 @@ class TweetDetailCell: UITableViewCell {
     @IBOutlet weak var favoriteLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
 
     
     var tweet: Tweet! {
@@ -29,12 +30,22 @@ class TweetDetailCell: UITableViewCell {
             let url = NSURL(string: (tweet.user?.profileImageURL)!)
             avatarImageView.setImageWithURL(url!)
             
-            retweetLabel.text = "\(tweet.retweeted!)"
-            favoriteLabel.text = "\(tweet.favorited!)"
+            retweetLabel.text = "\(tweet.retweetedCount!)"
+            favoriteLabel.text = "\(tweet.favoritedCount!)"
             
             let dateOffset = NSDate().offsetFrom(tweet.createdAt!)
             timeLabel.text = dateOffset
             
+            if (tweet.retweeted == false){
+                retweetButton.setImage(UIImage(named: "RetweetIcon.png"), forState: .Normal)
+            }else{
+                retweetButton.setImage(UIImage(named: "RetweetIconPressed.png"), forState: .Normal)
+            }
+            if (tweet.favorited == false){
+                favoriteButton.setImage(UIImage(named: "LikeIcon.png"), forState: .Normal)
+            }else{
+                favoriteButton.setImage(UIImage(named: "LikeIconPressed.png"), forState: .Normal)
+            }
         }
     }
 
