@@ -21,6 +21,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -119,7 +123,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadMoreData() {
-        let lastTweet = tweets![(tweets!.count)-1]
+        if tweets == nil{
+            print("array is nil")
+            return
+        }
+        let lastTweet = tweets!.last!
         let lastID = lastTweet.id!
         let param = ["max_id": lastID]
         TwitterClient.sharedInstance.homeTimelineWithParams(param, completion: { (var tweets, error) -> () in
@@ -151,8 +159,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        })
+        refreshControl.endRefreshing()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        })
     }
 
     /*

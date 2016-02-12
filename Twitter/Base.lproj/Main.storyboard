@@ -260,17 +260,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="What's happening?" translatesAutoresizingMaskIntoConstraints="NO" id="Y6L-G2-jn4">
-                                <rect key="frame" x="20" y="80" width="280" height="182"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="182" id="241-Um-UBB"/>
-                                    <constraint firstAttribute="width" constant="280" id="XCY-73-o05"/>
-                                </constraints>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BF-iv-rXI">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <subviews>
@@ -285,33 +274,79 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGs-WN-aGN">
-                                        <rect key="frame" x="281" y="27" width="31" height="30"/>
+                                        <rect key="frame" x="271" y="27" width="41" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                        <state key="normal" title="Post">
+                                        <state key="normal" title="Tweet">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="onPost:" destination="qB8-dv-XPW" eventType="touchUpInside" id="IHo-il-F3c"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIX-Ca-qIF">
+                                        <rect key="frame" x="234" y="32" width="29" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <color key="textColor" red="0.83050881410256405" green="0.83050881410256405" blue="0.83050881410256405" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="RzF-gL-soH"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRL-8b-IpW">
+                                <rect key="frame" x="78" y="77" width="42.5" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gqh-8F-7RG">
+                                <rect key="frame" x="20" y="77" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="NWh-WG-6gE"/>
+                                    <constraint firstAttribute="height" constant="50" id="j3T-AA-8zB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="@ScreenName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnX-eK-PMR">
+                                <rect key="frame" x="78" y="96" width="89.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="What's happening?" translatesAutoresizingMaskIntoConstraints="NO" id="Y6L-G2-jn4">
+                                <rect key="frame" x="20" y="135" width="280" height="182"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="182" id="241-Um-UBB"/>
+                                    <constraint firstAttribute="width" constant="280" id="XCY-73-o05"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Y6L-G2-jn4" firstAttribute="top" secondItem="9BF-iv-rXI" secondAttribute="bottom" constant="15" id="5es-e4-hD1"/>
+                            <constraint firstItem="lnX-eK-PMR" firstAttribute="top" secondItem="PRL-8b-IpW" secondAttribute="bottom" constant="1" id="3uJ-q4-lAB"/>
+                            <constraint firstItem="Y6L-G2-jn4" firstAttribute="top" secondItem="9BF-iv-rXI" secondAttribute="bottom" constant="70" id="5es-e4-hD1"/>
                             <constraint firstAttribute="trailing" secondItem="Y6L-G2-jn4" secondAttribute="trailing" constant="20" id="Hiw-pa-m2Y"/>
                             <constraint firstItem="9BF-iv-rXI" firstAttribute="leading" secondItem="eNr-Fl-G9r" secondAttribute="leading" id="K9J-PA-T4J"/>
+                            <constraint firstItem="PRL-8b-IpW" firstAttribute="top" secondItem="9BF-iv-rXI" secondAttribute="bottom" constant="12" id="MpV-8d-Ydh"/>
+                            <constraint firstItem="gqh-8F-7RG" firstAttribute="leading" secondItem="eNr-Fl-G9r" secondAttribute="leading" constant="20" id="NOU-D4-6in"/>
+                            <constraint firstItem="lnX-eK-PMR" firstAttribute="leading" secondItem="PRL-8b-IpW" secondAttribute="leading" id="OP3-av-P7C"/>
+                            <constraint firstItem="gqh-8F-7RG" firstAttribute="top" secondItem="9BF-iv-rXI" secondAttribute="bottom" constant="12" id="Q7a-ji-dVB"/>
                             <constraint firstAttribute="trailing" secondItem="9BF-iv-rXI" secondAttribute="trailing" id="bd4-k7-B72"/>
+                            <constraint firstItem="PRL-8b-IpW" firstAttribute="leading" secondItem="gqh-8F-7RG" secondAttribute="trailing" constant="8" id="eum-RS-afV"/>
                             <constraint firstItem="9BF-iv-rXI" firstAttribute="top" secondItem="eNr-Fl-G9r" secondAttribute="top" id="fSt-TG-7Sg"/>
                             <constraint firstItem="Y6L-G2-jn4" firstAttribute="leading" secondItem="eNr-Fl-G9r" secondAttribute="leading" constant="20" id="v0O-rL-zLF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="characterCountLabel" destination="dIX-Ca-qIF" id="MeS-8P-DLD"/>
+                        <outlet property="nameLabel" destination="PRL-8b-IpW" id="k4B-bb-JCV"/>
+                        <outlet property="profileImageView" destination="gqh-8F-7RG" id="Hk0-Hc-JxD"/>
+                        <outlet property="screenNameLabel" destination="lnX-eK-PMR" id="IcG-PZ-fcA"/>
                         <outlet property="tweetTextView" destination="Y6L-G2-jn4" id="c8c-IO-Y68"/>
                     </connections>
                 </viewController>
