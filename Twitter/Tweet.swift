@@ -93,5 +93,21 @@ extension NSDate {
         if secondsFrom(date) > 0 { return "\(secondsFrom(date))s" }
         return ""
     }
+    
+    func toString(date: NSDate) -> String {
+        let calendar = NSCalendar.currentCalendar()
+        var components = calendar.components([.Day , .Month , .Year], fromDate: date)
+        
+        let year =  components.year
+        let month = components.month
+        let day = components.day
+        
+        components = calendar.components([ .Hour, .Minute, .Second], fromDate: date)
+        let hour = components.hour
+        let minutes = components.minute
+        let second = components.second
+        
+        return "\(month)/\(day)/\(year), \(hour):\(minutes):\(second)"
+    }
 }
 

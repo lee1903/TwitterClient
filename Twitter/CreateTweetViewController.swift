@@ -110,12 +110,12 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         let param = ["status": content]
         
         TwitterClient.sharedInstance.postTweet(param)
+        TwitterClient.sharedInstance.toRefresh = true
         
         self.view.endEditing(true)
         self.dismissViewControllerAnimated(true) { () -> Void in
         }
     }
-    
     
 
     /*

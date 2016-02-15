@@ -17,6 +17,7 @@ let twitterBaseURL = NSURL(string: "https://api.twitter.com")
 class TwitterClient: BDBOAuth1SessionManager {
     
     var loginCompletion: ((user: User?, error: NSError?) -> ())?
+    var toRefresh = false
     
     class var sharedInstance: TwitterClient {
         struct Static {
@@ -83,7 +84,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
-            print(response)
+            //print(response)
             
             }, failure: { (operation, error) -> Void in
                 completion(tweets: nil, error: error)

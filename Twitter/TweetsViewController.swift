@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
@@ -85,9 +86,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         cell.favoriteButton.addTarget(self, action: "favoriteButtonPressed:", forControlEvents: .TouchUpInside)
         cell.favoriteButton.tag = indexPath.row
         
-        cell.selectionStyle = .None
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("avatarImageTapped:"))
+        cell.avatarImageView.tag = indexPath.row
+        cell.avatarImageView.userInteractionEnabled = true
+        cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
         
         return cell
+    }
+    
+    func avatarImageTapped(sender: AnyObject){
+        self.performSegueWithIdentifier("ProfileSegue", sender: sender)
     }
     
     func retweetButtonPressed(sender: UIButton){
@@ -159,6 +167,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("TweetDetailSegue", sender: tweets![indexPath.row])
+    }
+    
     func refreshControlAction(refreshControl: UIRefreshControl) {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
@@ -168,10 +180,31 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewDidAppear(animated: Bool) {
-        TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        })
+        if TwitterClient.sharedInstance.toRefresh == true{
+            TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+                self.tweets = tweets
+                self.tableView.reloadData()
+            })
+            TwitterClient.sharedInstance.toRefresh = false
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TweetDetailSegue"{
+            let viewController  = segue.destinationViewController as! DetailViewController
+            let tweet = sender as! Tweet
+            
+            viewController.tweet = tweet
+        } else if segue.identifier == "ProfileSegue"{
+            let viewController  = segue.destinationViewController as! UserProfileViewController
+            let imageView = sender!.view as! UIImageView
+            viewController.user = tweets![imageView.tag].user!
+        }
+        
     }
 
     /*
