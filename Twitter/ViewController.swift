@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onLogin(sender: AnyObject) {
+        print("button pressed")
         TwitterClient.sharedInstance.loginWithCompletion(){
             (user: User?, error: NSError?) in
             if user != nil{
@@ -35,7 +36,6 @@ class ViewController: UIViewController {
                 print("error logging in")
             }
         }
-        
     }
 }
 

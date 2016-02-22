@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     
     var tweet: Tweet?
     
@@ -108,10 +109,17 @@ class DetailViewController: UIViewController {
         retweetCountLabel.text = "\(tweet!.retweetedCount!)"
     }
     
+    @IBAction func onReply(sender: AnyObject) {
+        self.performSegueWithIdentifier("DetailReplySegue", sender: sender)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "fromDetailtoProfileSegue"{
             let viewController  = segue.destinationViewController as! UserProfileViewController
             viewController.user = tweet!.user!
+        } else if segue.identifier == "DetailReplySegue"{
+            let viewController  = segue.destinationViewController as! ReplyViewController
+            viewController.tweet = tweet!
         }
         
     }

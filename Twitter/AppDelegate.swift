@@ -24,7 +24,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil{
             let vc = storyboard.instantiateViewControllerWithIdentifier("NavController")
             window?.rootViewController = vc
+            
+            let timeLineNavigationController = storyboard.instantiateViewControllerWithIdentifier("NavController") as! UINavigationController
+            timeLineNavigationController.tabBarItem.title = "Timeline"
+            timeLineNavigationController.tabBarItem.image = UIImage(named: "timeline")
+            
+            let profileNavigationController = storyboard.instantiateViewControllerWithIdentifier("profileController")
+            profileNavigationController.tabBarItem.title = "Profile"
+            profileNavigationController.tabBarItem.image = UIImage(named: "profile")
+            
+            let tabBarController = UITabBarController()
+            
+            tabBarController.viewControllers = [timeLineNavigationController, profileNavigationController]
+            
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
         }
+        
         return true
     }
     

@@ -19,10 +19,26 @@ class TweetDetailCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
 
+    @IBOutlet weak var favoriteButton2: UIButton!
+    @IBOutlet weak var retweetButton2: UIButton!
+    @IBOutlet weak var replyButton2: UIButton!
+    
+    @IBOutlet weak var retweetedStatusView: UIView!
+    @IBOutlet weak var retweetedByLabel: UILabel!
     
     var tweet: Tweet! {
         didSet{
+            if retweetedStatusView != nil{
+                if tweet.retweetedBy != nil{
+                    retweetedStatusView.hidden = false
+                    retweetedByLabel.text = (tweet.retweetedBy)! +  " Retweeted"
+                } else{
+                    retweetedStatusView.hidden = true
+                }
+            }
+            
             tweetLabel.text = tweet.text
             screenNameLabel.text = "@" + (tweet.user?.screenname)!
             nameLabel.text = tweet.user?.name

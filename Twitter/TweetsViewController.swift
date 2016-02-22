@@ -28,6 +28,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
@@ -86,6 +87,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         cell.favoriteButton.addTarget(self, action: "favoriteButtonPressed:", forControlEvents: .TouchUpInside)
         cell.favoriteButton.tag = indexPath.row
         
+        cell.replyButton.addTarget(self, action: "replyButtonPressed:", forControlEvents: .TouchUpInside)
+        cell.replyButton.tag = indexPath.row
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("avatarImageTapped:"))
         cell.avatarImageView.tag = indexPath.row
         cell.avatarImageView.userInteractionEnabled = true
@@ -96,6 +100,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func avatarImageTapped(sender: AnyObject){
         self.performSegueWithIdentifier("ProfileSegue", sender: sender)
+    }
+    
+    func replyButtonPressed(sender: UIButton){
+        self.performSegueWithIdentifier("ReplySegue", sender: tweets![sender.tag])
     }
     
     func retweetButtonPressed(sender: UIButton){
@@ -190,6 +198,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewWillAppear(animated: Bool) {
+        tabBarController?.becomeFirstResponder()
         self.tableView.reloadData()
     }
     
@@ -197,12 +206,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         if segue.identifier == "TweetDetailSegue"{
             let viewController  = segue.destinationViewController as! DetailViewController
             let tweet = sender as! Tweet
-            
             viewController.tweet = tweet
         } else if segue.identifier == "ProfileSegue"{
             let viewController  = segue.destinationViewController as! UserProfileViewController
             let imageView = sender!.view as! UIImageView
             viewController.user = tweets![imageView.tag].user!
+        } else if segue.identifier == "ReplySegue"{
+            let viewController  = segue.destinationViewController as! ReplyViewController
+            let tweet = sender as! Tweet
+            viewController.tweet = tweet
         }
         
     }

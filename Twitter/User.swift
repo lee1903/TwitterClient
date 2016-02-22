@@ -37,7 +37,6 @@ class User: NSObject {
         followingCount = dictionary["friends_count"] as? Int
         backgroundImageURL = dictionary["profile_banner_url"] as? String
         bio = dictionary["description"] as? String
-        print(dictionary)
     }
     
     func logout(){
